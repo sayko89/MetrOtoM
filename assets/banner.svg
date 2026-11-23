@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="MetrOtoM — Havayı 48 saat önceden oku, faturayı önceden göster. Yenilikçi Fikirler Kampı 2026">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#9FB7D6" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#0E1B2C" stop-opacity="1"/>
+      <stop offset="0.66" stop-color="#0E1B2C" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="300" fill="#0E1B2C"/>
+  <rect width="1200" height="300" fill="url(#grid)"/>
+
+  <!-- 48 saat penceresi -->
+  <rect x="1010" y="40" width="150" height="210" fill="#2A78D6" fill-opacity="0.08"/>
+  <line x1="1010" y1="40" x2="1010" y2="250" stroke="#9FB7D6" stroke-opacity="0.45" stroke-dasharray="5 6"/>
+  <text x="1020" y="62" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#9FB7D6">+48 saat</text>
+
+  <!-- sıcaklık (turuncu) ve gecikmeli tüketim (mavi) -->
+  <path d="M760 205 C785 205 794 120 819 120 S854 205 879 205 S913 95 938 95 S972 200 998 200 S1032 70 1057 70 S1091 190 1116 190 S1148 120 1160 110"
+        fill="none" stroke="#EB6834" stroke-width="4" stroke-linecap="round"/>
+  <path d="M760 220 C794 220 804 145 829 145 S863 222 888 222 S922 125 948 125 S982 218 1007 218 S1041 100 1066 100 S1101 210 1126 210 S1154 150 1160 142"
+        fill="none" stroke="#2A78D6" stroke-width="4" stroke-linecap="round"/>
+  <rect x="0" y="0" width="1200" height="300" fill="url(#fade)"/>
+
+  <!-- güneş -->
+  <circle cx="86" cy="80" r="24" fill="#EB6834"/>
+  <g stroke="#EB6834" stroke-width="4" stroke-linecap="round">
+    <line x1="86" y1="40" x2="86" y2="48"/><line x1="86" y1="112" x2="86" y2="120"/>
+    <line x1="46" y1="80" x2="54" y2="80"/><line x1="118" y1="80" x2="126" y2="80"/>
+    <line x1="58" y1="52" x2="64" y2="58"/><line x1="108" y1="102" x2="114" y2="108"/>
+    <line x1="58" y1="108" x2="64" y2="102"/><line x1="108" y1="58" x2="114" y2="52"/>
+  </g>
+
+  <text x="148" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="72" font-weight="800" fill="#FFFFFF" letter-spacing="2">MetrOtoM</text>
+  <text x="44" y="166" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#F2A27E">Havayı 48 saat önceden oku, faturayı önceden göster.</text>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#9FB7D6">
+    <rect x="44" y="196" width="22" height="4" fill="#EB6834"/><text x="74" y="203">sıcaklık</text>
+    <rect x="150" y="196" width="22" height="4" fill="#2A78D6"/><text x="180" y="203">tüketim</text>
+  </g>
+  <text x="44" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#9FB7D6">Yenilikçi Fikirler Kampı 2026 · Ege Teknopark · Aydem Perakende · Gediz Perakende</text>
+</svg>

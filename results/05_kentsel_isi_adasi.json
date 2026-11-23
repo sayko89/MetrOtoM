@@ -1,0 +1,112 @@
+{
+ "ortalama_KIA": {
+  "kia_gece": {
+   "Aydin": 0.74,
+   "Bodrum": 0.88,
+   "Denizli": 0.67,
+   "Izmir": 1.57,
+   "Manisa": 1.22
+  },
+  "kia_gunduz": {
+   "Aydin": 0.95,
+   "Bodrum": -0.01,
+   "Denizli": 0.76,
+   "Izmir": 0.68,
+   "Manisa": 0.37
+  }
+ },
+ "gece_KIA_mevsim": {
+  "ara": {
+   "Aydin": 0.72,
+   "Bodrum": 0.87,
+   "Denizli": 0.71,
+   "Izmir": 1.64,
+   "Manisa": 1.19
+  },
+  "kis": {
+   "Aydin": 0.54,
+   "Bodrum": 1.12,
+   "Denizli": 0.43,
+   "Izmir": 1.29,
+   "Manisa": 1.09
+  },
+  "yaz": {
+   "Aydin": 0.99,
+   "Bodrum": 0.65,
+   "Denizli": 0.85,
+   "Izmir": 1.72,
+   "Manisa": 1.4
+  }
+ },
+ "H_a_temmuz_agustos": {
+  "Aydin": {
+   "2024": {
+    "Tem": 1.17,
+    "Agu": 1.01
+   },
+   "2025": {
+    "Tem": 1.08,
+    "Agu": 0.94
+   }
+  },
+  "Bodrum": {
+   "2024": {
+    "Tem": 0.43,
+    "Agu": 0.71
+   },
+   "2025": {
+    "Tem": 0.66,
+    "Agu": 0.67
+   }
+  },
+  "Denizli": {
+   "2024": {
+    "Tem": 1.19,
+    "Agu": 0.81
+   },
+   "2025": {
+    "Tem": 0.6,
+    "Agu": 0.77
+   }
+  },
+  "Izmir": {
+   "2024": {
+    "Tem": 1.54,
+    "Agu": 1.69
+   },
+   "2025": {
+    "Tem": 1.89,
+    "Agu": 1.83
+   }
+  },
+  "Manisa": {
+   "2024": {
+    "Tem": 1.48,
+    "Agu": 1.41
+   },
+   "2025": {
+    "Tem": 1.48,
+    "Agu": 1.43
+   }
+  }
+ },
+ "H_c_izmir_mesken": {
+  "CDD+HDD": [
+   0.6,
+   0.51
+  ],
+  "CDD+HDD+KIA": [
+   0.61,
+   0.46
+  ]
+ },
+ "izmir_yaz_KIA_duzeltmesi": {
+  "kia_yaz_C": 1.72,
+  "gece_CDH_artis_%": 37.8,
+  "toplam_CDH_artis_%": 7.0,
+  "gece_25C_ustu_saat": [
+   501,
+   635
+  ]
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "tum_test_mar_ara": {
+  "naive": {
+   "MAPE": 5.64,
+   "dengesizlik_TL": 5216563075
+  },
+  "A_takvim": {
+   "MAPE": 4.66,
+   "dengesizlik_TL": 4635864277
+  },
+  "B_meteo": {
+   "MAPE": 4.41,
+   "dengesizlik_TL": 4140117825
+  },
+  "C_meteo_egesiz": {
+   "MAPE": 4.42,
+   "dengesizlik_TL": 4188874232
+  },
+  "saat": 7344
+ },
+ "yaz_haz_eyl": {
+  "naive": {
+   "MAPE": 6.82,
+   "dengesizlik_TL": 2246246115
+  },
+  "A_takvim": {
+   "MAPE": 5.38,
+   "dengesizlik_TL": 2065613337
+  },
+  "B_meteo": {
+   "MAPE": 5.08,
+   "dengesizlik_TL": 1776810810
+  },
+  "C_meteo_egesiz": {
+   "MAPE": 5.15,
+   "dengesizlik_TL": 1799829826
+  },
+  "saat": 2928
+ },
+ "sicak_hava_dalgasi_gunleri": {
+  "naive": {
+   "MAPE": 4.62,
+   "dengesizlik_TL": 280885239
+  },
+  "A_takvim": {
+   "MAPE": 4.89,
+   "dengesizlik_TL": 294037457
+  },
+  "B_meteo": {
+   "MAPE": 4.3,
+   "dengesizlik_TL": 230564199
+  },
+  "C_meteo_egesiz": {
+   "MAPE": 4.4,
+   "dengesizlik_TL": 237152833
+  },
+  "saat": 600
+ },
+ "haftalik": {
+  "hafta": 45,
+  "B_daha_iyi": 24
+ },
+ "sicak_gun_sayisi": 25
+}

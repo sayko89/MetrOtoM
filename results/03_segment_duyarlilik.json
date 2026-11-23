@@ -1,0 +1,26 @@
+{
+ "segment_gunluk_degisim_%": {
+  "Aydınlatma": -12.6,
+  "Diğer": 5.2,
+  "Mesken": 30.2,
+  "Sanayi": 5.0,
+  "Tarımsal Sulama": 530.3,
+  "Ticarethane": 74.6
+ },
+ "mesken_il_gunluk_degisim_%": {
+  "aydin": 34.1,
+  "denizli": 12.4,
+  "manisa": 32.8,
+  "mugla": 34.6
+ },
+ "temmuz_serbest_tuketici_payi_%": {
+  "Mesken/aydin": 0.8,
+  "Mesken/denizli": 0.3,
+  "Mesken/manisa": 0.2,
+  "Mesken/mugla": 6.2,
+  "Ticarethane/aydin": 70.4,
+  "Ticarethane/denizli": 65.9,
+  "Ticarethane/manisa": 57.2,
+  "Ticarethane/mugla": 73.2
+ }
+}

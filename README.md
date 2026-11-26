@@ -13,13 +13,15 @@
   <img alt="Durum: proje fikri + ön analiz" src="https://img.shields.io/badge/durum-proje%20fikri%20%2B%20%C3%B6n%20analiz-9FB7D6?style=flat-square&labelColor=0E1B2C">
   <img alt="Veri: açık veri" src="https://img.shields.io/badge/veri-EP%C4%B0A%C5%9E%20%C2%B7%20Open--Meteo%20%C2%B7%20MODIS-9FB7D6?style=flat-square&labelColor=0E1B2C">
   <img alt="Python 3.13" src="https://img.shields.io/badge/python-3.13-9FB7D6?style=flat-square&labelColor=0E1B2C">
+  <img alt="Lisans: MIT" src="https://img.shields.io/badge/lisans-MIT-9FB7D6?style=flat-square&labelColor=0E1B2C">
 </p>
 
 <p align="center">
   <a href="#ön-analizler"><b>Bulgular</b></a> &nbsp;·&nbsp;
   <a href="#nasıl-çalışır">Nasıl çalışır?</a> &nbsp;·&nbsp;
   <a href="#çalıştırma">Çalıştırma</a> &nbsp;·&nbsp;
-  <a href="#repo-yapısı">Repo yapısı</a>
+  <a href="#repo-yapısı">Repo yapısı</a> &nbsp;·&nbsp;
+  <a href="docs/juri-sorulari.md">Jüri soruları</a>
 </p>
 
 <br>
@@ -161,6 +163,7 @@ MODIS verisini yeniden üretmek için [`gee/kentsel_isi_adasi.js`](gee/kentsel_i
 | [`data/`](data) | EPİAŞ, Open-Meteo (gerçekleşen ve 2 gün önceki tahmin) ve MODIS verileri |
 | [`results/`](results) | Analiz çıktıları (JSON, CSV) |
 | [`figures/`](figures) | Grafikler |
+| [`docs/juri-sorulari.md`](docs/juri-sorulari.md) | Jüri soruları ve ölçülmüş rakamlarla cevaplarımız |
 | [`assets/`](assets) | README görselleri |
 
 ## Veri kaynakları
@@ -174,6 +177,8 @@ MODIS verisini yeniden üretmek için [`gee/kentsel_isi_adasi.js`](gee/kentsel_i
 | Yüzey sıcaklığı, arazi örtüsü, yükseklik | NASA MODIS MOD11A2 v061 ve MCD12Q1, SRTM; [Google Earth Engine](https://earthengine.google.com) üzerinden |
 
 EPİAŞ verileri kaynak gösterilerek kullanılabilir. Veriler bu repoda yalnızca analizlerin tekrarlanabilmesi için bulunur.
+
+Kod ve dokümanlar: [MIT](LICENSE). `data/` klasöründeki veriler kaynaklarına aittir ve kendi koşullarına tabidir.
 
 **Yöntem kaynakları:** Allen vd. (1998) FAO-56 · Hersbach vd. (2020) ERA5, *QJRMS* 146(730) · Chen ve Guestrin (2016) XGBoost, *KDD '16* · Hochreiter ve Schmidhuber (1997) LSTM, *Neural Computation* 9(8) · Hong ve Fan (2016) olasılıksal yük tahmini, *IJF* 32(3).
 

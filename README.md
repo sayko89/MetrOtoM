@@ -55,7 +55,7 @@
 | Bölge | İzmir, Manisa (Gediz Perakende); Aydın, Denizli, Muğla (Aydem Perakende) |
 | Veri | Hava: ERA5 ve Open-Meteo · Uydu: MODIS (kentsel ısı adası) · Piyasa: EPİAŞ (tüketim, PTF, SMF) · Pilotta: anonim akıllı sayaç verisi |
 | Model | XGBoost + LSTM hibrit, kuantil regresyonla belirsizlik aralığı, segment bazlı |
-| Ön test | Sıcak hava dalgası günlerinde tahmin hatası −%12, yaklaşık dengesizlik maliyeti −%22 |
+| Ön test | 2 gün önceki gerçek hava tahminiyle: yaklaşık dengesizlik maliyeti yazın −%13, sıcak hava dalgası günlerinde −%14 |
 | Meteorolojik katkı | Termal gecikme, derece-saatler, ısı birikimi, FAO-56 buharlaşma-terleme, kentsel ısı adası düzeltmesi, kıyı–iç kent ayrımı |
 | İş modeli (varsayım) | Abone sayısına göre fiyatlanan yıllık yazılım lisansı (SaaS); önce Aydem ve Gediz Perakende'de pilot |
 
@@ -70,6 +70,7 @@
 | # | Analiz ve veri | Bulgu | MetrOtoM'a etkisi |
 |---|---|---|---|
 | 1 | **Saatlik ön test** — EPİAŞ 2024 Türkiye geneli saatlik tüketim, PTF, SMF; 7 şehrin saatlik hava verisi · [`01`](analysis/01_saatlik_ontest.py) | MAPE %4,66 → %4,41; sıcak hava dalgası günlerinde %4,89 → %4,30. Yaklaşık dengesizlik maliyeti: tüm dönem −%11, yaz −%14, sıcak günler −%22 | Meteorolojik girdiler tahmin motorunun çekirdeği |
+| 1b | **Gerçek hava tahminiyle ön test** — aynı veri; test haftalarında her saat için 2 gün önce yapılmış Open-Meteo tahminleri · [`07`](analysis/07_tahminle_ontest.py) | Yaklaşık dengesizlik maliyeti: tüm dönem −%10, yaz −%13,5, sıcak günler −%14. MAPE: yaz %5,38 → %5,12, sıcak günler %4,89 → %4,53. 2 günlük sıcaklık tahmin hatası şehre göre 0,9–1,9°C | Kazanç, sistemin gerçek çalışma koşulunda da büyük ölçüde korunuyor |
 | 2 | **Termal gecikme ve ısı birikimi** — aynı veri · [`02`](analysis/02_termal_gecikme.py) | En güçlü ilişki 1–2 saat önceki sıcaklıkla; ısı birikimi etkisi 1–2 gün belirgin, 3–4 günde sönüyor | 2 saatlik gecikme ve çok günlük birikim girdileri |
 | 3 | **Segment duyarlılığı** — EPİAŞ il bazlı aylık veri; Manisa, Aydın, Denizli, Muğla; Nisan → Temmuz 2025 · [`03`](analysis/03_segment_duyarlilik.py) | Günlük tüketim: mesken +%30, ticarethane +%75, tarımsal sulama ~6 kat, sanayi +%5 | Mesken, ticarethane ve sulama odaklı segment modelleri |
 | 4 | **Aylık hava–tüketim ilişkisi** — İzmir 2025, 12 ay · [`04`](analysis/04_izmir_aylik.py) | Derece-günler ticarethanedeki aylık değişimin %92'sini, meskendekinin %82'sini açıklıyor. Mesken zirvesi en sıcak aydan (Temmuz) bir ay sonra (Ağustos) | Fatura sıcaktan haftalar sonra geliyor: erken uyarı penceresi |
@@ -79,7 +80,8 @@
 Bütün sayılar [`results/`](results) klasöründeki JSON ve CSV dosyalarından gelir.
 
 **Dürüst okuma:**
-- Meteorolojik girdili model 45 haftanın 24'ünde daha iyi. Kazanç her hafta değil, **sıcak dönemlerde** ortaya çıkıyor; MetrOtoM'un değeri de tam bu dönemlerde.
+- Gerçekleşen hava yerine **2 gün önceki gerçek tahminler** kullanılınca kazancın büyük kısmı korunuyor: yazın neredeyse hiç değişmiyor (maliyet −%13,2'ye karşı −%13,5), sıcak günlerde −%20'den −%14'e iniyor. Sıcak günler tahminin en zor olduğu günler.
+- Meteorolojik girdili model 45 haftanın 24'ünde daha iyi (gerçek tahminle 23'ünde). Kazanç her hafta değil, **sıcak dönemlerde** ortaya çıkıyor; MetrOtoM'un değeri de tam bu dönemlerde.
 - Mesken tüketiminin Ağustos'ta zirve yapmasını **ısı adası açıklamıyor**: Temmuz her sıcaklık göstergesinde daha sıcak, İzmir'de ısı adasının Temmuz–Ağustos farkı 0,2°C'nin altında. Aynı şehirdeki ticarethanede bu kayma yok. En olası açıklama **sayaç okuma dönemi**; bu, faturanın sıcak dönemden haftalar sonra geldiğini, yani uyarı için zaman olduğunu gösteriyor. Doğrulanması için günlük veya saatlik bölge verisi gerekiyor.
 - Kentsel ısı adasının asıl etkisi zamanda değil **mekânda**: aynı hava tahmininde kent merkezindeki aboneye kırsaldakinden daha yüksek tüketim tahmini yapılmalı. İl bazlı aylık tüketime eklendiğinde açıklama gücünü artırmadı (düzeltilmiş R² 0,51 → 0,46).
 
@@ -110,13 +112,13 @@ flowchart LR
 
 ## Varsayımlar ve sınırlar
 
-- Saatlik testte hava girdisi olarak **gerçekleşen** hava değerleri kullanıldı. Gerçek hava tahminiyle kazanç bir miktar azalabilir.
+- Analiz 1'de hava girdisi olarak **gerçekleşen** değerler kullanıldı; Analiz 1b bunu 2 gün önceki gerçek model tahminleriyle tekrarlıyor. 1b'de hissedilen sıcaklık iki veri setinde de aynı formülle (BoM) hesaplandığından sayılar Analiz 1'den biraz farklı.
 - Saatlik tüketim **Türkiye geneli**dir. Bölge bazlı saatlik veri açık değil; il bazlı veri yalnızca **aylık**.
 - Dengesizlik maliyeti PTF ve SMF ile %3 marjlı basitleştirilmiş bir kuralla **yaklaşık** hesaplandı. TL değerleri tüm Türkiye tüketimini tek bir portföy varsayar; **oran** olarak yorumlanmalı.
 - Aylık analizler 12 gözleme dayanır.
 - MODIS **yüzey** sıcaklığını ölçer; gece hava sıcaklığına yakındır ama aynı değildir. Yalnız bulutsuz günleri ve sabit geçiş saatlerini (≈10:30 ve ≈22:30) görür. %38'lik rakam bu yaklaşıma dayanır.
 - Abone davranışının bildirimlere ne kadar yanıt vereceği (H3) henüz sınanmadı; pilot aşamada sınırlı bir abone grubunda ölçülecek.
-- Tam projede doğrulama, hava tahmini verisiyle ve Aydem/Gediz'in bölge bazlı saatlik verisiyle tekrarlanacak.
+- Tam projede doğrulama Aydem/Gediz'in bölge bazlı saatlik verisiyle tekrarlanacak.
 
 ---
 
@@ -138,6 +140,7 @@ python 03_segment_duyarlilik.py
 python 04_izmir_aylik.py
 python 05_kentsel_isi_adasi.py
 python 06_sekil.py                 # Şekil 1, 01 ve 04'ün çıktısını kullanır
+python 07_tahminle_ontest.py       # 2 gün önceki gerçek tahminlerle ön test, ~5 dk
 ```
 
 MODIS verisini yeniden üretmek için [`gee/kentsel_isi_adasi.js`](gee/kentsel_isi_adasi.js) dosyasını [Google Earth Engine Code Editor](https://code.earthengine.google.com)'a yapıştırıp **Run**'a basın; **Tasks** sekmesinden `metrotom_isi_adasi` işini başlatın, CSV Google Drive'a iner.
@@ -153,8 +156,9 @@ MODIS verisini yeniden üretmek için [`gee/kentsel_isi_adasi.js`](gee/kentsel_i
 | [`analysis/04_izmir_aylik.py`](analysis/04_izmir_aylik.py) | İzmir 2025 aylık hava–tüketim regresyonu, Temmuz–Ağustos göstergeleri |
 | [`analysis/05_kentsel_isi_adasi.py`](analysis/05_kentsel_isi_adasi.py) | Kentsel ısı adası, denizellik, ızgara verisi düzeltmesi |
 | [`analysis/06_sekil.py`](analysis/06_sekil.py) | Şekil 1 |
+| [`analysis/07_tahminle_ontest.py`](analysis/07_tahminle_ontest.py) | Eğitim gerçekleşen havayla, test 2 gün önceki gerçek tahminlerle |
 | [`gee/kentsel_isi_adasi.js`](gee/kentsel_isi_adasi.js) | Google Earth Engine: MODIS ile kent ve kırsal gece/gündüz yüzey sıcaklığı |
-| [`data/`](data) | EPİAŞ, Open-Meteo ve MODIS verileri (aşağıdaki kaynaklardan indirildi) |
+| [`data/`](data) | EPİAŞ, Open-Meteo (gerçekleşen ve 2 gün önceki tahmin) ve MODIS verileri |
 | [`results/`](results) | Analiz çıktıları (JSON, CSV) |
 | [`figures/`](figures) | Grafikler |
 | [`assets/`](assets) | README görselleri |
@@ -166,6 +170,7 @@ MODIS verisini yeniden üretmek için [`gee/kentsel_isi_adasi.js`](gee/kentsel_i
 | 2024 saatlik gerçek zamanlı tüketim, PTF, SMF | [EPİAŞ Şeffaflık Platformu](https://seffaflik.epias.com.tr) |
 | İl bazlı aylık tüketim miktarları (profil grubuna göre, 2025) | EPİAŞ Şeffaflık Platformu › Elektrik Tüketim › Tüketici Bilgisi › Tüketim Miktarları (veri kaynağı: dağıtım şirketleri) |
 | Saatlik hava verisi, 7 şehir, 2024–2025 | [Open-Meteo Historical Weather API](https://open-meteo.com) (CC BY 4.0) |
+| 2 gün önceki hava tahminleri, 7 şehir, Mart–Aralık 2024 | [Open-Meteo Previous Runs API](https://open-meteo.com/en/docs/previous-runs-api), `*_previous_day2` değişkenleri (CC BY 4.0) |
 | Yüzey sıcaklığı, arazi örtüsü, yükseklik | NASA MODIS MOD11A2 v061 ve MCD12Q1, SRTM; [Google Earth Engine](https://earthengine.google.com) üzerinden |
 
 EPİAŞ verileri kaynak gösterilerek kullanılabilir. Veriler bu repoda yalnızca analizlerin tekrarlanabilmesi için bulunur.

@@ -1,0 +1,79 @@
+{
+ "tum_test_mar_ara": {
+  "A_takvim": {
+   "MAPE": 4.66,
+   "dengesizlik_TL": 4635864277,
+   "MAPE_degisim_%": 0.0,
+   "dengesizlik_degisim_%": 0.0
+  },
+  "B_gercek": {
+   "MAPE": 4.48,
+   "dengesizlik_TL": 4190981381,
+   "MAPE_degisim_%": -3.9,
+   "dengesizlik_degisim_%": -9.6
+  },
+  "B_tahmin": {
+   "MAPE": 4.48,
+   "dengesizlik_TL": 4168046862,
+   "MAPE_degisim_%": -3.7,
+   "dengesizlik_degisim_%": -10.1
+  },
+  "saat": 7344
+ },
+ "yaz_haz_eyl": {
+  "A_takvim": {
+   "MAPE": 5.38,
+   "dengesizlik_TL": 2065613337,
+   "MAPE_degisim_%": 0.0,
+   "dengesizlik_degisim_%": 0.0
+  },
+  "B_gercek": {
+   "MAPE": 5.12,
+   "dengesizlik_TL": 1792320099,
+   "MAPE_degisim_%": -4.9,
+   "dengesizlik_degisim_%": -13.2
+  },
+  "B_tahmin": {
+   "MAPE": 5.12,
+   "dengesizlik_TL": 1787659305,
+   "MAPE_degisim_%": -4.8,
+   "dengesizlik_degisim_%": -13.5
+  },
+  "saat": 2928
+ },
+ "sicak_hava_dalgasi_gunleri": {
+  "A_takvim": {
+   "MAPE": 4.89,
+   "dengesizlik_TL": 294037457,
+   "MAPE_degisim_%": 0.0,
+   "dengesizlik_degisim_%": 0.0
+  },
+  "B_gercek": {
+   "MAPE": 4.37,
+   "dengesizlik_TL": 234160738,
+   "MAPE_degisim_%": -10.6,
+   "dengesizlik_degisim_%": -20.4
+  },
+  "B_tahmin": {
+   "MAPE": 4.53,
+   "dengesizlik_TL": 251957247,
+   "MAPE_degisim_%": -7.3,
+   "dengesizlik_degisim_%": -14.3
+  },
+  "saat": 600
+ },
+ "haftalik_A_dan_iyi": {
+  "hafta": 45,
+  "B_gercek": 24,
+  "B_tahmin": 23
+ },
+ "sicaklik_tahmin_hatasi_MAE_C": {
+  "izmir": 1.12,
+  "manisa": 1.27,
+  "aydin": 1.33,
+  "denizli": 1.86,
+  "bodrum": 0.88,
+  "istanbul": 1.02,
+  "ankara": 1.2
+ }
+}
